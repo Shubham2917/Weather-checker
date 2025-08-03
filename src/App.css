@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: white;
+  overflow-x: hidden;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 🌤 Weather Backgrounds */
+.app.clear { background: linear-gradient(to bottom, #56ccf2, #2f80ed); }
+.app.clouds { background: linear-gradient(to bottom, #757f9a, #d7dde8); }
+.app.rain { background: linear-gradient(to bottom, #3a6073, #16222a); }
+.app.thunderstorm { background: linear-gradient(to bottom, #232526, #414345); }
+.app.default-bg { background: linear-gradient(to bottom, #1e3c72, #2a5298); }
+
+/* 🌞 Rotating Sun */
+.sun {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #ffeb3b, #fbc02d);
+  border-radius: 50%;
+  animation: rotateSun 20s linear infinite;
+  box-shadow: 0 0 50px rgba(255, 235, 59, 0.7);
+  z-index: 1;
+}
+
+@keyframes rotateSun {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ☁️ Clouds */
+.cloud {
+  position: absolute;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: moveCloud 50s linear infinite;
+}
+
+.cloud1 { width: 250px; height: 90px; top: 10%; left: -250px; }
+.cloud2 { width: 200px; height: 80px; top: 25%; left: -300px; animation-delay: 15s; }
+.cloud3 { width: 180px; height: 70px; top: 40%; left: -200px; animation-delay: 30s; }
+
+@keyframes moveCloud {
+  from { transform: translateX(-300px); }
+  to { transform: translateX(1500px); }
+}
+
+/* ⚡ Lightning */
+.lightning {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  opacity: 0;
+  animation: flash 5s infinite;
+}
+
+@keyframes flash {
+  0%, 95%, 100% { opacity: 0; }
+  96%, 98% { opacity: 1; }
+}
+
+/* 📌 Left Weather Panel */
+.left-panel {
+  flex: 0.4;
+  padding: 30px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
+  margin: auto;
+  animation: fadeIn 1s ease-in-out;
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  width: 60%;
+}
+
+button {
+  padding: 10px 14px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: white;
+  color: #2a5298;
+  transform: scale(1.05);
+}
+
+/* 🌤 Forecast Section */
+.forecast {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.forecast::-webkit-scrollbar {
+  height: 8px;
+}
+.forecast::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+}
+
+/* 🌤 Forecast Cards */
+.forecast-day {
+  flex: 0 0 auto;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px;
+  width: 140px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.forecast-day:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.2);
+}
+.forecast-day:active {
+  transform: scale(1.05);
+}
